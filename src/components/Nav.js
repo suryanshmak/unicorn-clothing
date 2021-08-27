@@ -37,58 +37,57 @@ const Nav = () => {
     </nav>
   );
 
+  const handleClick = (prevState) => !prevState;
   const hideSideBar = () => setIsOpen(false);
-
   const handleCheckoutClick = () => history.push("/checkout");
 
   return (
-    <NavBar className={`menu-container ${isOpen ? "active" : ""}`}>
-      <header>
-        <button
-          onClick={() => setIsOpen((prevState) => !prevState)}
-          className="burger"
-        >
-          <span className="bar bar1" />
-          <span className="bar bar2" />
-          <span className="bar bar3" />
-        </button>
-        <Link to="/" onClick={hideSideBar} className="home">
-          UNI
-        </Link>
-        <div className="products">{products}</div>
-        <div className="profile-container">
-          <button
-            ref={profileRef}
-            onClick={() => setProfileDropdown((prevState) => !prevState)}
-            className="profile"
-          >
-            <User />
+    <NavBar>
+      <div className={`menu-container ${isOpen ? "active" : ""}`}>
+        <header>
+          <button onClick={() => setIsOpen(handleClick)} className="burger">
+            <span className="bar bar1" />
+            <span className="bar bar2" />
+            <span className="bar bar3" />
           </button>
-          <div className={`dropdown ${profileDropdown ? "active" : ""}`}>
-            {!isSigned && <Link to="/login">Log In</Link>}
-            {isSigned && (
-              <button onClick={() => auth.signOut()}>Sign out</button>
-            )}
-            {isSigned && <Link to="/">Account Settings</Link>}
-            <button>Dark Theme</button>
-          </div>
-        </div>
-        <div className="cart-container">
-          <button onClick={handleCheckoutClick} className="cart">
-            <ShoppingBag />
-          </button>
-          <span className="cart-quantity">{quantity}</span>
-          <div className="dropdown cart-dd">
-            <NavCartItem />
-            <button className="checkout" onClick={handleCheckoutClick}>
-              Checkout
+          <Link to="/" onClick={hideSideBar} className="home">
+            UNI
+          </Link>
+          <div className="products">{products}</div>
+          <div className="profile-container">
+            <button
+              ref={profileRef}
+              onClick={() => setProfileDropdown(handleClick)}
+              className="profile"
+            >
+              <User />
             </button>
+            <div className={`dropdown ${profileDropdown ? "active" : ""}`}>
+              {!isSigned && <Link to="/login">Log In</Link>}
+              {isSigned && (
+                <button onClick={() => auth.signOut()}>Sign out</button>
+              )}
+              {isSigned && <Link to="/">Account Settings</Link>}
+              <button>Dark Theme</button>
+            </div>
           </div>
-        </div>
-      </header>
-      <div className="sidebar">
-        <div className="products-bar" onClick={hideSideBar}>
-          {products}
+          <div className="cart-container">
+            <button onClick={handleCheckoutClick} className="cart">
+              <ShoppingBag />
+            </button>
+            <span className="cart-quantity">{quantity}</span>
+            <div className="dropdown cart-dd">
+              <NavCartItem />
+              <button className="checkout" onClick={handleCheckoutClick}>
+                Checkout
+              </button>
+            </div>
+          </div>
+        </header>
+        <div className="side-bar">
+          <div className="products-bar" onClick={hideSideBar}>
+            {products}
+          </div>
         </div>
       </div>
     </NavBar>
@@ -97,7 +96,8 @@ const Nav = () => {
 
 export default Nav;
 
-const NavBar = styled.header`
+const NavBar = styled.div`
+  position: relative;
   header {
     position: fixed;
     display: flex;
@@ -194,7 +194,7 @@ const NavBar = styled.header`
     flex-direction: column;
   }
 
-  .sidebar,
+  .side-bar,
   .burger {
     display: none;
   }
@@ -207,17 +207,18 @@ const NavBar = styled.header`
       display: none;
     }
 
-    .sidebar {
+    .side-bar {
       position: fixed;
       top: 0;
-      right: -110%;
+      right: 110%;
       height: 100vh;
-      z-index: 5;
+      z-index: 10;
       width: 100%;
       padding: 4rem 0;
       background: white;
+      display: block;
 
-      .products-bar {
+      nav {
         display: flex;
         flex-direction: column;
         list-style: none;
@@ -250,9 +251,8 @@ const NavBar = styled.header`
     }
 
     .menu-container.active {
-      .sidebar {
+      .side-bar {
         right: 0;
-        display: block;
       }
 
       .burger {
@@ -273,6 +273,7 @@ const NavBar = styled.header`
       }
     }
   }
+
   @media (max-width: 425px) {
     .cart-container:hover {
       .cart-dd {

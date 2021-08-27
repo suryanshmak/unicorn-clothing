@@ -20,8 +20,8 @@ const Recommended = () => {
             {Object.keys(items)
               .map((key) => items[key])
               .filter((item, idx) => idx < 2)
-              .map((item) => (
-                <Product key={item.id} product={item} routeName={routeName} />
+              .map((item, idx) => (
+                <Product key={idx} product={item} routeName={routeName} />
               ))}
           </React.Fragment>
         ))}
