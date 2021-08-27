@@ -11,11 +11,12 @@ const CollectionContainer = ({
 }) => {
   const collection = useSelector((state) => selectCollection(id)(state));
   const isFetching = useSelector((state) => !selectIsFetching(state));
-  const { routeName, items, title } = collection;
 
   if (isFetching) {
     return <Spinner />;
   }
+
+  const { routeName, items, title } = collection;
 
   return (
     <CollectionPageContainer>

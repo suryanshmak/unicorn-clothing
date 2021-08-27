@@ -15,8 +15,8 @@ const Recommended = () => {
     <RecommendedStyle>
       {collections
         .filter((item, i) => i < 2)
-        .map(({ routeName, items, id }) => (
-          <React.Fragment key={id}>
+        .map(({ routeName, items, id }, idx) => (
+          <React.Fragment key={idx}>
             {Object.keys(items)
               .map((key) => items[key])
               .filter((item, idx) => idx < 2)

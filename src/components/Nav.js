@@ -206,11 +206,7 @@ const NavBar = styled.header`
     .products {
       display: none;
     }
-    .cart-container:hover {
-      .cart-dd {
-        display: none;
-      }
-    }
+
     .sidebar {
       position: fixed;
       top: 0;
@@ -274,6 +270,13 @@ const NavBar = styled.header`
         .bar3 {
           transform: rotate(-45deg);
         }
+      }
+    }
+  }
+  @media (max-width: 425px) {
+    .cart-container:hover {
+      .cart-dd {
+        display: none;
       }
     }
   }
