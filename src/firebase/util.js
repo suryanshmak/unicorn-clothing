@@ -3,7 +3,7 @@ import "firebase/compat/auth";
 import "firebase/compat/firestore";
 
 const config = {
-  apiKey: process.env.REACT_APP_API_KEY,
+  apiKey: "AIzaSyDwf5Ev-1eO1SY-Au-1JCzl6IGtPr2rMnI",
   authDomain: "uni-db-9f90d.firebaseapp.com",
   projectId: "uni-db-9f90d",
   storageBucket: "uni-db-9f90d.appspot.com",
