@@ -160,5 +160,6 @@ const LoginForm = styled.div`
     font-size: 16px;
     color: rgb(67, 56, 202);
     text-decoration: underline;
+    padding-left: 5px;
   }
 `;
